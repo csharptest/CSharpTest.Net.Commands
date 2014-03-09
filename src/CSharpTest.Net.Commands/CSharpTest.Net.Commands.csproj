@@ -8,7 +8,7 @@
     <ProjectGuid>{7BD5EDD1-445C-46D1-A0B2-4B68CB51EADB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CSharpTest.Net</RootNamespace>
+    <RootNamespace>CSharpTest.Net.Commands</RootNamespace>
     <AssemblyName>CSharpTest.Net.Commands</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <OutputPath>..\bin\</OutputPath>
@@ -30,61 +30,40 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
-    <DocumentationFile>..\bin\CSharpTest.Net.Commands.xml</DocumentationFile>
+    <DocumentationFile>bin\CSharpTest.Net.Commands.XML</DocumentationFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <Optimize>True</Optimize>
-    <DocumentationFile>..\bin\CSharpTest.Net.Commands.xml</DocumentationFile>
+    <DocumentationFile>bin\CSharpTest.Net.Commands.XML</DocumentationFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Data">
-      <Private>False</Private>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Web">
-      <Private>False</Private>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandService.cs" />
-    <Compile Include="Commands\HttpCommands.cs" />
-    <Compile Include="Commands\Argument.cs" />
-    <Compile Include="Commands\Attributes.cs" />
-    <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\CommandFilter.cs" />
-    <Compile Include="Commands\CommandInterpreter.cs" />
-    <Compile Include="Commands\DefaultCommands.cs" />
-    <Compile Include="Commands\Exceptions.cs" />
-    <Compile Include="Commands\HelpDisplay.cs" />
-    <Compile Include="Commands\DisplayInfoBase.cs" />
-    <Compile Include="Commands\Interfaces.cs" />
-    <Compile Include="Commands\Option.cs" />
-    <Compile Include="Http\HttpServer.cs" />
-    <Compile Include="Http\MimeMessage.cs" />
-    <Compile Include="IO\TempFile.cs" />
+    <Compile Include="Argument.cs" />
+    <Compile Include="Attributes.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandFilter.cs" />
+    <Compile Include="CommandInterpreter.cs" />
+    <Compile Include="DefaultCommands.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="HelpDisplay.cs" />
+    <Compile Include="DisplayInfoBase.cs" />
+    <Compile Include="Interfaces.cs" />
+    <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ServiceAccessRights.cs" />
-    <Compile Include="Services\SvcControlManager.cs" />
-    <Compile Include="Shared\ArgumentList.cs" />
-    <Compile Include="Shared\Check.cs" />
-    <Compile Include="Shared\Configuration.cs" />
-    <Compile Include="Shared\FileList.cs" />
-    <Compile Include="Shared\ProcessInfo.cs" />
-    <Compile Include="Shared\PublicShared.cs" />
-    <Compile Include="Shared\QuickLog.cs" />
-    <Compile Include="Utils\Constants.cs" />
+    <Compile Include="ArgumentList.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LICENSE-2.0.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
