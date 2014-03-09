@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nuspec.xsd">
+  <metadata>
+
+    <version>$version$</version>
+    <id>CSharpTest.Net.Commands</id>
+    <title>CSharpTest.Net.Commands</title>
+    <authors>Roger Knapp</authors>
+    <owners>Roger Knapp</owners>
+    <language>en-US</language>
+    <licenseUrl>http://csharptest.net/src/LICENSE-2.0.txt</licenseUrl>
+    <projectUrl>https://github.com/csharptest/CSharpTest.Net.Commands</projectUrl>
+    <iconUrl>http://csharptest.net/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright 2008-2014 by Roger Knapp, Licensed under the Apache License, Version 2.0</copyright>
+
+    <tags>commandline parse args arguments options command-line command interpreter</tags>
+    <summary>CSharpTest.Net.RpcLibrary provides pure managed interop with the Win32 RPC API</summary>
+    <releaseNotes>See the main project page (http://code.google.com/p/csharptest-net/) for release notes.</releaseNotes>
+    <description>
+      <![CDATA[Provides an easy to use means of exposing a set of public class methods as a console program.  
+      Parses and converts the arguments to the appropriate types and invokes the method.  Can run as a full
+      interpreter with support for piping IO between commands.  Built in help command for your class methods
+      as well as exporting full help to html.]]>
+    </description>
+
+    <references>
+      <reference file="CSharpTest.Net.Commands.dll"/>
+    </references>
+  
+  </metadata>
+  
+  <files>
+    <!-- For injecting directly in another product -->
+    <file src="src\CSharpTest.Net.Commands\*.cs" target="content\cs"/>
+    
+    <file src="src\CSharpTest.Net.Commands\bin\CSharpTest.Net.Commands.dll" target="lib\net20" />
+    <file src="src\CSharpTest.Net.Commands\bin\CSharpTest.Net.Commands.pdb" target="lib\net20" />
+    <file src="src\CSharpTest.Net.Commands\bin\CSharpTest.Net.Commands.xml" target="lib\net20" />
+
+    <file src="src\CSharpTest.Net.Commands\bin\net40\CSharpTest.Net.Commands.dll" target="lib\net40" />
+    <file src="src\CSharpTest.Net.Commands\bin\net40\CSharpTest.Net.Commands.pdb" target="lib\net40" />
+    <file src="src\CSharpTest.Net.Commands\bin\net40\CSharpTest.Net.Commands.xml" target="lib\net40" />
+
+    <file src="src\CSharpTest.Net.Commands\**\*.cs" target="src\CSharpTest.Net.Commands\"/>
+  </files>
+  
+</package>

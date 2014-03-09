@@ -15,7 +15,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("CSharpTest.Net.Library.dll")]
+[assembly: AssemblyTitle("CSharpTest.Net.Commands.dll")]
 [assembly: AssemblyDescription("Library of utility and general purpose classes.")]
 [assembly: AssemblyProduct("http://CSharpTest.Net/Projects")]
 [assembly: AssemblyConfiguration("Debug")]

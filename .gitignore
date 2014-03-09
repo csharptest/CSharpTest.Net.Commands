@@ -19,6 +19,7 @@ Release
 *.mdf
 *.snk
 *.DotSettings
+*.nupkg
 
 packages/*/*
 depend/*
