@@ -11,22 +11,11 @@
     <RootNamespace>CSharpTest.Net.Commands</RootNamespace>
     <AssemblyName>CSharpTest.Net.Commands</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-    <OutputPath>..\bin\</OutputPath>
-    <IntermediateOutputPath>$(OutputPath)obj\$(AssemblyName)\</IntermediateOutputPath>
-    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>pdbonly</DebugType>
-    <DefineConstants>NET20;TRACE</DefineConstants>
     <ErrorReport>none</ErrorReport>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <WarningLevel>4</WarningLevel>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\keys\csharptest.net.snk</AssemblyOriginatorKeyFile>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Optimize>false</Optimize>
