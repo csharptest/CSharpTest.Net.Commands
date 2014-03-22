@@ -32,7 +32,7 @@
   
   <files>
     <!-- For injecting directly in another product -->
-    <file src="src\CSharpTest.Net.Commands\*.cs" target="content\cs"/>
+    <file src="src\CSharpTest.Net.Commands\*.cs" target="content\Commands"/>
     
     <file src="src\CSharpTest.Net.Commands\bin\CSharpTest.Net.Commands.dll" target="lib\net20" />
     <file src="src\CSharpTest.Net.Commands\bin\CSharpTest.Net.Commands.pdb" target="lib\net20" />
