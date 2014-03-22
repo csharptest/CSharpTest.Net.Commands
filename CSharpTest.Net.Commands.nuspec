@@ -31,6 +31,8 @@
   </metadata>
   
   <files>
+    <!-- Quick-start -->
+    <file src="src\Example\*.cs" target="content"/>
     <!-- For injecting directly in another product -->
     <file src="src\CSharpTest.Net.Commands\*.cs" target="content\Commands"/>
     
