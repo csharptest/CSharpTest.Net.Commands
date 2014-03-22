@@ -4,23 +4,6 @@ using System.Reflection;
 using CSharpTest.Net.Commands;
 
 /// <summary>
-/// Uncomment the examples below for demonstration, otherwise complete the implementation by constructing
-/// the partial class Commands in it's own source file.
-/// </summary>
-partial class Commands
-{
-    //[Option("name", DefaultValue = "Foo", Description = "Set or get my name.")]
-    //public string MyName { get; set; }
-
-    //[Command("hello", Description = "Say hello world.")]
-    //public void Hello(string fromWho = null, int? repeated = null)
-    //{
-    //    for (int i=0; i < repeated.GetValueOrDefault(1); i++)
-    //        Console.WriteLine("Hello world, from {0}", fromWho ?? MyName);
-    //}
-}
-
-/// <summary>
 /// The actual program class can be simplified, but the following demostrates most of the capability
 /// that can be used in the CommandInterpreter as well as default implementations for some standard
 /// options: /nologo, /verbose, and /wait

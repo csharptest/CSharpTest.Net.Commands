@@ -54,6 +54,24 @@ namespace CSharpTest.Net.Commands
 					_default = a.DefaultValue;
 				}
 			}
+
+		    if (Visible && _description == mi.ToString())
+		    {
+		        if (IsFlag)
+		        {
+		            if (Required)
+                        _description = String.Format("Required flag can be \"/{0}\" or \"/{0}:false\".", base.DisplayName);
+		            else
+                        _description = String.Format("Optional flag of \"/{0}\" or \"/{0}:false\".", base.DisplayName);
+		        }
+		        else
+                {
+                    if (Required)
+                        _description = String.Format("Specifies the required value for \"{0}\" of type {1}.", base.DisplayName, UnderlyingType.Name);
+                    else
+                        _description = String.Format("Specifies an optional value for \"{0}\" of type {1}.", base.DisplayName, UnderlyingType.Name);
+                }
+		    }
 		}
 
 		private ParameterInfo Parameter { get { return (ParameterInfo)base.Member; } }
