@@ -31,7 +31,20 @@ namespace CSharpTest.Net.CommandsTest
 	{
 		delegate void Action();
 		#region TestFixture SetUp/TearDown
-		[TestFixtureSetUp]
+
+	    [SetUp]
+	    public void BeforeTest()
+        {
+            Environment.ExitCode = 0;
+	    }
+
+        [TearDown]
+        public void AfterTest()
+        {
+            Environment.ExitCode = 0;
+        }
+
+	    [TestFixtureSetUp]
 		public virtual void Setup()
 		{
 		}
@@ -243,7 +256,7 @@ namespace CSharpTest.Net.CommandsTest
 			Assert.AreEqual("Other", ci.Options[0].DisplayName);
 			Assert.AreEqual("SomeData", ci.Options[1].DisplayName);
 
-			Assert.AreEqual(4, ci.Commands.Length);
+			Assert.AreEqual(5, ci.Commands.Length);
 			Assert.AreEqual("BlowUp", ci.Commands[0].DisplayName);
 			Assert.AreEqual("Count", ci.Commands[1].DisplayName); // <= alpha-sorted
 			Assert.AreEqual("ForXtoYbyZ", ci.Commands[2].DisplayName);
@@ -263,7 +276,7 @@ namespace CSharpTest.Net.CommandsTest
 
 			ci.AddHandler(new TestCommands());
 			Assert.AreEqual(2, ci.Options.Length);
-			Assert.AreEqual(4, ci.Commands.Length);
+			Assert.AreEqual(5, ci.Commands.Length);
         }
 
         [Test]
@@ -643,7 +656,8 @@ namespace CSharpTest.Net.CommandsTest
 
         [Test]
 	    public void TestNullableDefaultArgs()
-	    {
+        {
+            Environment.ExitCode = 0;
 			CommandInterpreter ci = new CommandInterpreter(new TestCommands());
 
 	        ICommand cmd;
