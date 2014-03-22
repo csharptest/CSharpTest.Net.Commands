@@ -77,7 +77,7 @@ namespace CSharpTest.Net.Commands
 		private ParameterInfo Parameter { get { return (ParameterInfo)base.Member; } }
 
 		public Type Type { get { return Parameter.ParameterType; } }
-        public Type UnderlyingType { get { return Nullable.GetUnderlyingType(Parameter.ParameterType) ?? Parameter.ParameterType; } }
+        Type UnderlyingType { get { return Nullable.GetUnderlyingType(Parameter.ParameterType) ?? Parameter.ParameterType; } }
 
 		public override bool Visible { get { return base.Visible && !IsInterpreter && !IsAllArguments; } }
 		public bool Required { get { return _required; } }

@@ -165,6 +165,10 @@ namespace CSharpTest.Net.CommandsTest
 						break;
 				}
 			}
+
+	        public void NullableDefaultArgs(long lval, int? ival = 0, TraceLevel? enumVal = null, [Argument(Visible = false)]string sval = "SomeText")
+	        {
+	        }
 		}
 
 		class StaticTestFilter
@@ -541,9 +545,7 @@ namespace CSharpTest.Net.CommandsTest
 				DefaultCommands.Echo | DefaultCommands.Find | DefaultCommands.PipeCommands,
 				new TestCommands());
 
-            string input = String.Format("Count {0} | MORE", (int)(WindowHeight * 1.5));
-
-			result = Capture(ci, "Count 220 |FIND \"1\" |FIND \"0\" | FIND /V \"3\" | FIND /V \"4\" | FIND /V \"5\" | FIND /V \"6\" | FIND /V \"7\" | FIND /V \"8\" | FIND /V \"9\"");
+		    result = Capture(ci, "Count 220 |FIND \"1\" |FIND \"0\" | FIND /V \"3\" | FIND /V \"4\" | FIND /V \"5\" | FIND /V \"6\" | FIND /V \"7\" | FIND /V \"8\" | FIND /V \"9\"");
 			Assert.AreEqual("10\r\n100\r\n101\r\n102\r\n110\r\n120\r\n201\r\n210", result);
 
 			result = Capture(ci, "ECHO ABC | FIND \"abc\" |");
@@ -639,7 +641,38 @@ namespace CSharpTest.Net.CommandsTest
 			}
 		}
 
-		[Test]
+        [Test]
+	    public void TestNullableDefaultArgs()
+	    {
+			CommandInterpreter ci = new CommandInterpreter(new TestCommands());
+
+	        ICommand cmd;
+	        Assert.IsTrue(ci.TryGetCommand("NullableDefaultArgs", out cmd));
+
+	        var args = cmd.Arguments;
+            Assert.AreEqual(4, args.Length);
+            
+            Assert.AreEqual("lval", args[0].DisplayName);
+            Assert.AreEqual(true, args[0].Required);
+
+            Assert.AreEqual("ival", args[1].DisplayName);
+            Assert.AreEqual(false, args[1].Required);
+            Assert.AreEqual(0, args[1].DefaultValue);
+
+            Assert.AreEqual("enumVal", args[2].DisplayName);
+            Assert.AreEqual(false, args[2].Required);
+            Assert.AreEqual(null, args[2].DefaultValue);
+
+            Assert.AreEqual("sval", args[3].DisplayName);
+            Assert.AreEqual(false, args[3].Required);
+            Assert.AreEqual(false, args[3].Visible);
+            Assert.AreEqual("SomeText", args[3].DefaultValue);
+
+            ci.Run("NullableDefaultArgs", "1");
+            Assert.AreEqual(0, ci.ErrorLevel);
+	    }
+
+	    [Test]
 		public void EnsureSerializationOfException()
 		{
 			InterpreterException ex = null;
