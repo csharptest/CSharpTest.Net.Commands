@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 #endregion
+
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -19,12 +20,11 @@ using CSharpTest.Net.Commands;
 using System.IO;
 using System.ComponentModel;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading;
 using System.Diagnostics;
 
 #pragma warning disable 1591
 
-namespace CSharpTest.Net.Library.Test
+namespace CSharpTest.Net.CommandsTest
 {
 	[TestFixture]
 	public partial class TestCmdInterpreter
@@ -61,26 +61,6 @@ namespace CSharpTest.Net.Library.Test
 	        }
 	    }
 
-        static bool RemoveArgument(ref string[] arguments, string find, out string value)
-        {
-            value = null;
-            for (int i = 0; i < arguments.Length; i++)
-            {
-                if (arguments[i].IndexOfAny(new char[] {'-', '/'}) == 0)
-                {
-                    string[] parts = arguments[i].Substring(1).Split(new char[] {':', '='}, 2);
-                    if (StringComparer.OrdinalIgnoreCase.Equals(parts[0], find))
-                    {
-                        List<string> args = new List<string>(arguments);
-                        args.RemoveAt(i);
-                        arguments = args.ToArray();
-                        value = parts.Length > 1 ? parts[1] : null;
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
 	    /// <summary> Used to provide a set of test commands </summary>
 		class TestCommands
 		{
@@ -156,8 +136,6 @@ namespace CSharpTest.Net.Library.Test
 				else
 				{ st = number; end = 1; offset = -1; }
 	
-				Random r = new Random();
-
 				for (int i = st; true; i += offset)
 				{
 					if( text.Length == 0 )
@@ -207,7 +185,7 @@ namespace CSharpTest.Net.Library.Test
 				}
 				else
 				{
-					bool addLineNumbers = RemoveArgument(ref args, "linenumbers", out line);
+					bool addLineNumbers = ArgumentList.Remove(ref args, "linenumbers", out line);
 
 					TextWriter stdout = Console.Out;
 					StringWriter swout = new StringWriter();

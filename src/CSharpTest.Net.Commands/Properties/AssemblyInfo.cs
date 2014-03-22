@@ -16,15 +16,15 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("CSharpTest.Net.Commands.dll")]
-[assembly: AssemblyDescription("Library of utility and general purpose classes.")]
+[assembly: AssemblyDescription("Library of command-line parser and interpreter.")]
 [assembly: AssemblyProduct("http://CSharpTest.Net/Projects")]
 [assembly: AssemblyConfiguration("Debug")]
 
 [assembly: AssemblyCompany("Roger Knapp")]
-[assembly: AssemblyCopyright("Copyright 2009 by Roger Knapp, Licensed under the Apache License, Version 2.0")]
+[assembly: AssemblyCopyright("Copyright 2009-2014 by Roger Knapp, Licensed under the Apache License, Version 2.0")]
 
-[assembly: AssemblyVersion("2.13.222.435")]
-[assembly: AssemblyFileVersion("2.13.222.435")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: ObfuscateAssembly(false)]
 [assembly: ComVisibleAttribute(false)]

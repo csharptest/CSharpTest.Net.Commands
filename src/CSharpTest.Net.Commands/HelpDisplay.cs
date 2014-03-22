@@ -48,7 +48,7 @@ namespace CSharpTest.Net.Commands
         }
 
 		/// <summary> Display the Help text to Console.Out </summary>
-		[Command("Help", "-?", "/?", "?", Category = "Built-in", Description = "Gets the help for a specific command or lists available commands.")]
+        [Command("Help", "-?", "/?", "?", "--help", Category = "Built-in", Description = "Gets the help for a specific command or lists available commands.")]
 		public void Help(
 			[Argument("name", "command", "c", "option", "o", Description = "The name of the command or option to show help for.", DefaultValue = null)] 
 			string name,
@@ -78,10 +78,7 @@ namespace CSharpTest.Net.Commands
         {
             if (!viewAsHtml)
             {
-                if (items.Length == 1)
-                    items[0].Help();
-                else
-                    ShowHelp(items);
+                ShowHelp(items);
             }
             else
             {
@@ -151,9 +148,9 @@ namespace CSharpTest.Net.Commands
                             w.WriteStartElement("p");
                             w.WriteStartElement("pre");
                             w.WriteString(String.Format("C:\\> {0} {1} ", programName, command.AllNames[0].ToUpper()));
-                            foreach (Argument arg in command.Arguments)
+                            foreach (IArgument arg in command.Arguments)
                             {
-                                if (arg.Visible == false || arg.Type == typeof(ICommandInterpreter))
+                                if (arg.Visible == false || arg.IsInterpreter)
                                     continue;
                                 if (arg.IsAllArguments)
                                 {
@@ -172,9 +169,9 @@ namespace CSharpTest.Net.Commands
                             w.WriteElementString("strong", "Arguments:");
                             w.WriteEndElement();
                             w.WriteStartElement("ul");
-                            foreach (Argument arg in command.Arguments)
+                            foreach (IArgument arg in command.Arguments)
                             {
-                                if (arg.Visible == false || arg.Type == typeof(ICommandInterpreter))
+                                if (arg.Visible == false || arg.IsInterpreter)
                                     continue;
                                 if (arg.IsAllArguments)
                                     continue;
@@ -200,7 +197,18 @@ namespace CSharpTest.Net.Commands
             }
         }
 
-	    private void ShowHelp(IDisplayInfo[] items)
+        /// <summary>
+        /// Can be overridden to control or rewrite help output
+        /// </summary>
+        protected virtual void ShowHelp(IDisplayInfo[] items)
+        {
+            if (items.Length == 1)
+                items[0].Help();
+            else
+                ShowHelpFor(items);
+        }
+
+	    private void ShowHelpFor(IDisplayInfo[] items)
 		{
 			Dictionary<string, List<IDisplayInfo>> found = new Dictionary<string, List<IDisplayInfo>>(StringComparer.OrdinalIgnoreCase);
 			foreach (IDisplayInfo item in items)
@@ -217,17 +225,25 @@ namespace CSharpTest.Net.Commands
 					list.Add(item);
 			}
 
-			string fmt = "  {0,8}:  {1}";
-
 			List<string> categories = new List<string>(found.Keys);
 			categories.Sort();
 			foreach (string cat in categories)
 			{
 				Console.Out.WriteLine("{0}:", cat);
 				found[cat].Sort(new OrderByName<IDisplayInfo>());
-				foreach (IDisplayInfo info in found[cat])
-					Console.Out.WriteLine(fmt, info.DisplayName.ToUpper(), info.Description);
-				Console.WriteLine();
+
+                int indent = 6;
+			    foreach (IDisplayInfo info in found[cat])
+			    {
+			        if (info.DisplayName.Length > indent)
+			            indent = info.DisplayName.Length;
+			    }
+			    string fmt = "  {0," + indent + "}:  {1}";
+                foreach (IDisplayInfo info in found[cat])
+                {
+			        Console.Out.WriteLine(fmt, info.DisplayName.ToUpper(), info.Description);
+			    }
+			    Console.WriteLine();
 			}
 		}
 	}
@@ -240,11 +256,9 @@ namespace CSharpTest.Net.Commands
 			foreach (string name in this.AllNames)
 			{
 				Console.Write("{0} ", name.ToUpper());
-				bool nameRequred = false;
-				foreach (Argument arg in Arguments)
-				{
-					nameRequred |= arg.IsInterpreter | arg.IsAllArguments;
-					if (arg.IsInterpreter)
+			    foreach (IArgument arg in Arguments)
+                {
+                    if (arg.Visible == false || arg.IsInterpreter)
 						continue;
 					if (arg.IsAllArguments)
 					{
@@ -267,9 +281,9 @@ namespace CSharpTest.Net.Commands
 			Console.WriteLine();
 
 			bool startedArgs = false;
-			foreach (Argument arg in Arguments)
-			{
-				if (arg.IsInterpreter | arg.IsAllArguments)
+			foreach (IArgument arg in Arguments)
+            {
+                if (arg.Visible == false || arg.IsInterpreter || arg.IsAllArguments)
 					continue;
 				if (!startedArgs)
 				{
@@ -291,7 +305,7 @@ namespace CSharpTest.Net.Commands
 			if (!IsFlag) sb.Append('[');
 			sb.Append('/');
 			sb.Append(name);
-			if (!IsFlag) sb.AppendFormat("=]{0}", Type.Name);
+            if (!IsFlag) sb.AppendFormat("=]{0}", UnderlyingType.Name);
 			if (!Required) sb.Append(']');
 			return sb.ToString();
 		}

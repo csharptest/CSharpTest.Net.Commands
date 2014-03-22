@@ -242,7 +242,19 @@ namespace CSharpTest.Net.Commands
 			return value;
 		}
 
-        /// <summary> Command to set the value of an option </summary>
+	    /// <summary>
+	    /// Sets all options to their defined DefaultValue if supplied.
+	    /// </summary>
+	    public void SetDefaults()
+	    {
+	        foreach (var opt in Options)
+	        {
+                if (!ReferenceEquals(null, opt.DefaultValue))
+                    opt.Value = opt.DefaultValue;
+	        }
+	    }
+
+	    /// <summary> Command to set the value of an option </summary>
         [IgnoreMember]
 		public void Set(string property, object value) { Set(property, value, false); }
 
@@ -304,15 +316,16 @@ namespace CSharpTest.Net.Commands
 			command.Run(this, args.ToArray());
 		}
 
-		class QuitException : Exception { }
+        /// <summary> Used to stop running the interpreter </summary>
+        public sealed class QuitException : OperationCanceledException { }
+
 		[Command("Quit", "Exit", Visible = false)]
 		private void Quit() { throw new QuitException(); }
 
 		/// <summary> called to handle error events durring processing </summary>
 		protected virtual void OnError(Exception error)
 		{
-			Trace.TraceError(error.ToString());
-			if(error is OperationCanceledException || error is QuitException)
+			if(error is OperationCanceledException)
 			{/* Silent */}
 			else
 				Console.Error.WriteLine(error is ApplicationException ? error.Message : error.ToString());

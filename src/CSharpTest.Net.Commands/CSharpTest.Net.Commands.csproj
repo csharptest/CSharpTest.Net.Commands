@@ -44,6 +44,7 @@
     <Compile Include="HelpDisplay.cs" />
     <Compile Include="DisplayInfoBase.cs" />
     <Compile Include="Interfaces.cs" />
+    <Compile Include="Properties\Internal.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ArgumentList.cs" />
@@ -53,5 +54,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

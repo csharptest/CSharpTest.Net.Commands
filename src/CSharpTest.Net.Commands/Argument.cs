@@ -34,7 +34,13 @@ namespace CSharpTest.Net.Commands
 			_required = true;
 			_allArguments = Parameter.IsDefined(typeof(AllArgumentsAttribute), true);
 
-			foreach (DefaultValueAttribute a in mi.GetCustomAttributes(typeof(DefaultValueAttribute), true))
+		    if (Parameter.DefaultValue != DBNull.Value)
+		    {
+		        _default = Parameter.DefaultValue;
+		        _required = false;
+		    }
+
+		    foreach (DefaultValueAttribute a in mi.GetCustomAttributes(typeof(DefaultValueAttribute), true))
 			{
 				_default = a.Value;
 				_required = false;
@@ -53,6 +59,7 @@ namespace CSharpTest.Net.Commands
 		private ParameterInfo Parameter { get { return (ParameterInfo)base.Member; } }
 
 		public Type Type { get { return Parameter.ParameterType; } }
+        public Type UnderlyingType { get { return Nullable.GetUnderlyingType(Parameter.ParameterType) ?? Parameter.ParameterType; } }
 
 		public override bool Visible { get { return base.Visible && !IsInterpreter && !IsAllArguments; } }
 		public bool Required { get { return _required; } }

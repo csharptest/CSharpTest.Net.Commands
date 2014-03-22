@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{097601FB-7E62-47DA-8E48-B56C9AD5DF20}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>CSharpTest.Net.Library.Test</RootNamespace>
-    <AssemblyName>CSharpTest.Net.Library.Test</AssemblyName>
+    <RootNamespace>CSharpTest.Net.CommandsTest</RootNamespace>
+    <AssemblyName>CSharpTest.Net.Commands.Test</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>pdbonly</DebugType>
@@ -33,6 +33,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestArgumentList.cs" />
     <Compile Include="TestCmdInterpreter.cs" />
   </ItemGroup>
   <ItemGroup>
